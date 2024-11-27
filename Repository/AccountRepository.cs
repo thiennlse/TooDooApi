@@ -21,7 +21,7 @@ namespace Repository
 
         public async Task<List<ApplicationUsers>> GetAllAsync()
         {
-            return await _dbSet
+            return await _dbSet.OrderBy(u => u.FullName)
                 .Include(m => m.UserSubcriptions
                 .Where(subscription => subscription.EndDate > DateTime.Now.ToUniversalTime()))
                 .ThenInclude(u => u.Subcriptions)

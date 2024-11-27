@@ -52,6 +52,13 @@ namespace Service
         {
             try
             {
+
+                var user = await _accountRepo.GetByEmail(request.Email);
+                if (user != null)
+                {
+                    throw new Exception("This email already taken !!");
+                }
+
                 ApplicationUsers User = new ApplicationUsers
                 {
                     Email = request.Email,
